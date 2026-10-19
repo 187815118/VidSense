@@ -1,6 +1,8 @@
 # VidSense
 
-让长视频更有价值：把语音、画面文字和时间线组织成可检索、可追溯、可继续追问的知识。
+**Video Intelligence Workspace（视频智能分析工作台）**
+
+Turn long videos into knowledge, insights, and answers.
 
 ![Java 21](https://img.shields.io/badge/Java-21-E76F00)
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.5.9-6DB33F)
@@ -9,25 +11,29 @@
 
 这是基于 [Xiaoc7r/DOVideo-AI](https://github.com/Xiaoc7r/DOVideo-AI) 继续开发的公开版本，保留原有 Video Agent 架构，并增加手绘工作台、可选长期记忆及可靠性增强。原项目版权声明保留于 [LICENSE](LICENSE)。
 
-## 当前界面
+## 当前界面：真实 Java 后端视频案例
 
-以下为**当前前端代码实际运行截图**，采用项目自带 `?demo` 演示数据；视频示意图、示例答案与运行状态用于展示界面，不代表这次截图执行了真实模型分析。没有使用上游旧截图。
+以下截图来自部署后的 **VidSense 实际业务页面**，没有使用 `?demo`、Mock 或上游旧截图。视频选用 [Java Brains — Adding a REST Controller](https://www.youtube.com/watch?v=oRFCeRVWCNE)，仅展示原视频 **03:00–04:59.8** 的教学片段；第三方完整视频不随仓库发布。
 
-**手绘风视频工作台**
+**纸张风工作台：真实视频、代码画面、回答和证据时间线**
 
-![视频工作台](docs/images/workbench.png)
+![VidSense 视频工作台](docs/images/workbench.png)
 
-**结构化分析、时间戳证据与 Planner / Executor / Critic**
+**真实 Planner / Executor / Critic 状态**
 
-![Agent 分析界面](docs/images/agent-analysis.png)
+![VidSense Agent 分析界面](docs/images/agent-analysis.png)
 
-<details>
-<summary>长期记忆与偏好说明区域</summary>
+本次截图对应的任务实际返回 HTTP 202（15.101 ms），后台完成耗时 46.431 s、5 次 LLM 调用。**Critic 未通过**：部分引用无法在原始 ASR/OCR 中核验，页面保留了警告；不能把“任务完成”解释为“结论已验收”。这是单次本机服务访问观测，不是吞吐量或 P95 基准。
 
-![记忆与偏好卡片](docs/images/memory-board.png)
+**已保存的长期记忆、跨视频历史任务与用户偏好**
 
-当前这些前端卡片仍是说明/占位展示，并非完整的 Memory 管理界面；“用户偏好”示例不是已保存偏好。真实 Memory 读写、禁用、来源查询与补偿在后端实现。
-</details>
+![真实记忆与用户偏好](docs/images/memory-board.png)
+
+卡片由只读接口读取当前登录用户的真实 ACTIVE Memory，展示类型、作用域和可展开来源。图中的历史任务和偏好来自此前成功任务；当前带 Critic 警告的任务不作为成功结果写入长期记忆。“历史结论”卡展示当前结果摘要，并非另一套 Memory 数据库查询。
+
+此前同课程另一段 120 s 片段完成分析（30.333 s / 3 次 LLM），写入 USER_PREFERENCE、EPISODIC_TASK、PREVIOUS_RESULT；重新登录后的追问实际向 Planner 提供了 5 条记忆（55.275 s / 5 次 LLM，Critic 通过）。人工复核仍发现默认 HTTP 方法的过度概括，已提交反馈并禁用一条错误历史结论。**Critic 通过也不等于外部技术事实必然正确。**
+
+完整尝试、失败原因、来源及测量口径见 [真实案例记录](docs/java-backend-case.md) 和 [脱敏指标原始数据](docs/benchmarks/java-backend-case.json)。
 
 ## 能做什么
 
@@ -102,8 +108,8 @@ flowchart TD
 需要 JDK 21、Node.js 22+、Docker Compose v2、FFmpeg 和 Tesseract（建议安装 `chi_sim`、`eng`）；`yt-dlp` 仅视频链接导入需要。Windows 建议在 WSL2 中执行下面的 Bash 命令。
 
 ```bash
-git clone https://github.com/187815118/DOVideo-AI.git
-cd DOVideo-AI
+git clone https://github.com/187815118/VidSense.git
+cd VidSense
 cp .env.example .env
 ```
 

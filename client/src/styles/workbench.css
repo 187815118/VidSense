@@ -1469,6 +1469,11 @@
     grid-template-columns: minmax(0, 1.25fr) minmax(275px, 1fr);
   }
 }
+.saved-memory-list { list-style: none; padding: 0; margin: 12px 0; }
+.saved-memory-list li + li { border-top: 1px dashed var(--ink-muted, #a29f91); margin-top: 12px; padding-top: 12px; }
+.saved-memory-list p { white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.7; }
+.saved-memory-list small { overflow-wrap: anywhere; }
+.saved-memory-list summary { cursor: pointer; font-size: 12px; }
 @media (max-width: 760px) {
   :root {
     --nav-width: 68px;

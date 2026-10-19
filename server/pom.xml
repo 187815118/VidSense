@@ -10,8 +10,8 @@
 	<groupId>com.example</groupId>
 	<artifactId>server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>server</name>
-	<description>MediaCore Server</description>
+	<name>VidSense Server</name>
+	<description>VidSense Video Intelligence Workspace</description>
 
 	<properties>
 		<java.version>21</java.version>
@@ -137,7 +137,7 @@
 							<rules>
 								<requireJavaVersion>
 									<version>[21,)</version>
-									<message>DoVideoAI backend requires JDK 21 or newer.</message>
+									<message>VidSense backend requires JDK 21 or newer.</message>
 								</requireJavaVersion>
 							</rules>
 						</configuration>

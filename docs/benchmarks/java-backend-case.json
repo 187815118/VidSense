@@ -1,0 +1,179 @@
+{
+  "source_video": "https://www.youtube.com/watch?v=oRFCeRVWCNE",
+  "title": "Spring Boot Quick Start 11 - Adding a REST Controller",
+  "mock": false,
+  "displayed_case": {
+    "excerpt_original_start_seconds": 180,
+    "clip_actual_duration_seconds": 119.8,
+    "timestamp_basis": "relative to excerpt; add 180 seconds for original video",
+    "state": "COMPLETED_WITH_WARNINGS",
+    "elapsed_seconds": 46.431,
+    "submission": {
+      "http_status": 202,
+      "milliseconds": 15.101
+    },
+    "critic": {
+      "passed": false,
+      "feedback": [
+        "需要在结论中明确指出`@RestController`注解的具体作用。",
+        "建议在证据中补充控制器方法被映射的信息。",
+        "为每条结论重新检索并绑定可核验的时间戳证据"
+      ],
+      "missingRequirements": [],
+      "unsupportedClaims": [
+        "当前片段中提到了@RestController注解属于Spring MVC框架，并在import时说明了其来源。",
+        "证据无法在原始 ASR/OCR 中核验: 30000"
+      ],
+      "requiredTimestamps": [
+        30000,
+        90000
+      ]
+    },
+    "evaluation": {
+      "structuredValid": true,
+      "timestampCoverageRate": 1.0,
+      "evidenceSupportRate": 0.5,
+      "claimEvidenceSupportRate": 0.5,
+      "criticPassed": false,
+      "userAcceptanceRate": 0.0,
+      "feedbackSamples": 0
+    },
+    "metrics": {
+      "stage_duration_ms": {
+        "AGENT_LOOP": 40739,
+        "EXECUTOR": 25500,
+        "PLANNER": 4476,
+        "VIDEO_CONTEXT": 5499,
+        "CRITIC": 10679
+      },
+      "counters": {
+        "CRITICCalls": 2,
+        "criticEvidenceRefreshes": 1,
+        "ocrCalls": 1,
+        "AGENT_LOOPCalls": 1,
+        "inputTokensEstimated": 7270,
+        "modelCalls": 5,
+        "criticRounds": 2,
+        "contextSegmentsDropped": 0,
+        "asrCalls": 2,
+        "EXECUTORCalls": 2,
+        "outputTokensEstimated": 1072,
+        "VIDEO_CONTEXTCalls": 1,
+        "PLANNERCalls": 1
+      }
+    }
+  },
+  "earlier_successful_excerpt": {
+    "excerpt_original_start_seconds": 240,
+    "clip_duration_seconds": 120,
+    "elapsed_seconds": 30.333,
+    "submission": {
+      "http_status": 202,
+      "milliseconds": 17.124
+    },
+    "critic_passed": true,
+    "metrics": {
+      "stage_duration_ms": {
+        "AGENT_LOOP": 21361,
+        "EXECUTOR": 12796,
+        "PLANNER": 5094,
+        "VIDEO_CONTEXT": 8179,
+        "CRITIC": 3373
+      },
+      "counters": {
+        "CRITICCalls": 1,
+        "asrSegmentFailures": 1,
+        "criticPassed": 1,
+        "ocrCalls": 1,
+        "AGENT_LOOPCalls": 1,
+        "inputTokensEstimated": 4229,
+        "modelCalls": 3,
+        "criticRounds": 1,
+        "contextSegmentsDropped": 0,
+        "asrCalls": 3,
+        "EXECUTORCalls": 1,
+        "outputTokensEstimated": 555,
+        "VIDEO_CONTEXTCalls": 1,
+        "PLANNERCalls": 1
+      }
+    },
+    "cross_login_followup_seconds": 55.275,
+    "followup_critic_passed": true,
+    "followup_metrics": {
+      "stage_duration_ms": {
+        "EXECUTOR": 34052,
+        "PLANNER": 7775,
+        "CRITIC": 12852
+      },
+      "counters": {
+        "contextSegmentsDropped": 0,
+        "CRITICCalls": 2,
+        "EXECUTORCalls": 2,
+        "criticEvidenceRefreshes": 1,
+        "criticPassed": 1,
+        "modelCalls": 5,
+        "inputTokensEstimated": 14325,
+        "outputTokensEstimated": 1052,
+        "criticRounds": 2,
+        "PLANNERCalls": 1
+      }
+    },
+    "saved_memory_types": [
+      "EPISODIC_TASK",
+      "PREVIOUS_RESULT",
+      "USER_PREFERENCE"
+    ],
+    "saved_memory_count": 5,
+    "planner_memory_types": [
+      "EPISODIC_TASK",
+      "PREVIOUS_RESULT",
+      "USER_PREFERENCE"
+    ],
+    "planner_memory_count": 5,
+    "note": "Critic passed source-consistency checks but human review found a default-HTTP-method overgeneralization. Feedback was saved and one erroneous PREVIOUS_RESULT was disabled. Do not treat Critic as a technical correctness guarantee."
+  },
+  "manual_review": {
+    "feedback_saved": true,
+    "disabled_result_memories": 1,
+    "comment": "人工核验纠正：不要把课程中的 GET 演示推广为 RequestMapping 默认只支持 GET。后续总结只保留本片段直接支持的类标记、方法与 URL 映射；未明确的默认 HTTP 方法应保留不确定。"
+  },
+  "capture": {
+    "demo": false,
+    "errors": [],
+    "brand": "VidSense",
+    "visible_memory_count": 5,
+    "video": {
+      "readyState": 4,
+      "duration": 119.8,
+      "currentTime": 65,
+      "error": null
+    }
+  },
+  "other_attempts": [
+    {
+      "scenario": "full 475.6-second video",
+      "elapsed_seconds": 139.906,
+      "state": "FAILED",
+      "reason": "120-second Agent deadline"
+    },
+    {
+      "scenario": "full video resumed checkpoint",
+      "elapsed_seconds": 81.847,
+      "state": "COMPLETED_WITH_WARNINGS",
+      "critic_passed": false
+    },
+    {
+      "scenario": "refined goal on first excerpt",
+      "elapsed_seconds": 46.414,
+      "state": "COMPLETED_WITH_WARNINGS",
+      "critic_passed": false
+    }
+  ],
+  "limitations": [
+    "A new login was tested; there is no trusted persistent business sessionId in this case.",
+    "Current screenshot shows an actual Critic warning, not an all-green success.",
+    "Current rule-based memory extraction was used; optional LLM extraction/consolidation were not enabled in this run.",
+    "Earlier excerpt ASR had one failed tail segment; see counters.",
+    "Single-case wall-clock observations, not a statistical performance benchmark."
+  ]
+}

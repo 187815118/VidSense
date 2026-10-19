@@ -5,7 +5,7 @@
         <a
           class="brand"
           href="#board-top"
-          aria-label="DOVideo-AI 首页"
+          aria-label="VidSense 首页"
           @click.prevent="goToBoardSection('board-top')"
         >
           <svg class="brand-mark" viewBox="0 0 46 48" aria-hidden="true">
@@ -35,9 +35,9 @@
             />
           </svg>
           <span
-            ><strong>DOVideo-AI</strong
+            ><strong>VidSense</strong
             ><small
-              >让长视频更有价值 <span aria-hidden="true">✧</span></small
+              >视频智能分析工作台 <span aria-hidden="true">✧</span></small
             ></span
           >
         </a>
@@ -143,10 +143,10 @@
       <main class="main-container">
         <div class="board-heading">
           <div>
-            <p class="eyebrow">A LITTLE VIDEO. A LOT TO DISCOVER.</p>
+            <p class="eyebrow">VIDEO INTELLIGENCE WORKSPACE</p>
             <h1><SketchIcon name="video" :size="36" />视频分析工作台</h1>
             <p class="board-description">
-              上传长视频，让 AI 帮你看、听、读，找到值得留下的线索。
+              Turn long videos into knowledge, insights, and answers.
             </p>
           </div>
           <div class="heading-note">
@@ -610,7 +610,8 @@
                 taped
                 ><p class="note-lead">让发现，慢慢连成线。</p>
                 <p>历史任务与重要信息，在需要时成为下一次分析的参考。</p>
-                <div class="empty-note">记忆记录暂未在此展示</div>
+                <SavedMemoryList v-bind="memoryState" :items="taskMemories" :signed-in="Boolean(currentUser)" :demo="DEMO_MODE" />
+                <button v-if="currentUser && !DEMO_MODE" class="text-button" :disabled="memoryState.loading" @click="refreshMemory">刷新已保存记忆 ↻</button>
                 <template #footer
                   ><span>记忆是线索，视频是证据。</span
                   ><SketchIcon name="star" :size="18" /></template
@@ -622,13 +623,10 @@
                 tone="yellow"
                 taped
                 ><p class="note-lead">按你喜欢的方式表达。</p>
-                <p>在分析目标里告诉助手你的习惯，例如：</p>
-                <div class="preference-example">
-                  “用中文，简短一点，<br />按要点整理。”
-                </div>
-                <span class="quiet-label"
-                  >表达示例 · 非已保存偏好</span
-                ></PaperCard
+                <p>以下来自当前账号已保存的 USER_PREFERENCE。</p>
+                <SavedMemoryList v-bind="memoryState" :items="preferenceMemories" :signed-in="Boolean(currentUser)" :demo="DEMO_MODE" />
+                <p class="quiet-label">可以在分析目标中明确表达偏好；这里仅展示实际保存结果。</p>
+                </PaperCard
               >
               <PaperCard
                 id="history-notes"
@@ -688,7 +686,7 @@
               </div></PaperCard
             >
             <footer class="board-footer">
-              <span>DOVideo-AI · 把时间留给思考</span
+              <span>VidSense · 把时间留给思考</span
               ><span class="handwritten">Keep your curiosity alive. ✧</span>
             </footer>
           </div>
@@ -1281,6 +1279,8 @@ import PaperCard from './components/PaperCard.vue'
 import VideoSketch from './components/VideoSketch.vue'
 import AgentFlow from './components/AgentFlow.vue'
 import EvidenceTimeline from './components/EvidenceTimeline.vue'
+import SavedMemoryList from './components/SavedMemoryList.vue'
+import { createMemoryReader } from './memoryOverview'
 import { apiRequest, clearAuthToken, hasAuthToken, setAuthToken } from './api'
 import {
   forgetUploadProgress,
@@ -1311,6 +1311,10 @@ const searchQuery = ref('')
 const videoPlayer = ref(null)
 const sidebarPanel = ref(null)
 const sidebarBody = ref(null)
+const memoryState = ref({ loading: false, enabled: null, items: [], error: '' })
+const taskMemories = computed(() => memoryState.value.items.filter(item => item.type !== 'USER_PREFERENCE').slice(0, 6))
+const preferenceMemories = computed(() => memoryState.value.items.filter(item => item.type === 'USER_PREFERENCE'))
+const memoryReader = createMemoryReader({ request: apiRequest, update: state => { memoryState.value = state } })
 const authPanel = ref(null)
 const deletingId = ref(null)
 const isOffline = ref(typeof navigator !== 'undefined' && navigator.onLine === false)
@@ -1736,6 +1740,13 @@ const {
 })
 
 /** 追问的答案追加在长文末尾，主动滚过去，否则用户会以为“点了没反应”。 */
+const refreshMemory = () => memoryReader.load({ authenticated: Boolean(currentUser.value), demo: DEMO_MODE, videoId: sidebar.value.mediaId })
+watch(() => [currentUser.value?.id, sidebar.value.mediaId, sidebar.value.loading], () => {
+  memoryReader.clear()
+  if (!sidebar.value.loading) refreshMemory()
+}, { flush: 'sync' })
+onUnmounted(() => memoryReader.clear())
+
 const scrollToLatestAnswer = async () => {
   await nextTick()
   const container = sidebarBody.value?.querySelector('.markdown-content')
