@@ -1,0 +1,21 @@
+CREATE TABLE IF NOT EXISTS agent_memories (
+    memory_id VARCHAR(36) NOT NULL,
+    user_id BIGINT NOT NULL,
+    type VARCHAR(32) NOT NULL,
+    content VARCHAR(1200) NOT NULL,
+    source_task_id VARCHAR(160) NOT NULL,
+    source_video_id BIGINT NULL,
+    importance DOUBLE NOT NULL,
+    created_at TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    updated_at TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    status VARCHAR(16) NOT NULL,
+    scope VARCHAR(16) NOT NULL,
+    scope_key VARCHAR(160) NOT NULL,
+    session_id VARCHAR(128) NULL,
+    semantic_key VARCHAR(160) NOT NULL,
+    content_hash VARCHAR(64) NOT NULL,
+    PRIMARY KEY (memory_id),
+    UNIQUE KEY uk_memory_dedupe (user_id, scope_key, type, content_hash),
+    KEY idx_memory_user_status (user_id, status, updated_at),
+    KEY idx_memory_semantic (user_id, scope_key, type, semantic_key)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

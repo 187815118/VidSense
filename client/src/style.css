@@ -1,0 +1,72 @@
+@import "./styles/tokens.css";
+@import "./styles/paper.css";
+@import "./styles/workbench.css";
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 108px;
+}
+body {
+  margin: 0;
+  min-width: 360px;
+  color: var(--ink);
+  background: var(--paper-background);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.65;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+button {
+  color: inherit;
+  cursor: pointer;
+}
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+button svg {
+  flex: 0 0 auto;
+}
+input,
+textarea {
+  min-width: 0;
+  color: var(--ink);
+}
+input::placeholder,
+textarea::placeholder {
+  color: var(--ink-faint);
+}
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+::selection {
+  background: var(--lavender);
+  color: var(--ink);
+}
+body:has(.auth-backdrop) {
+  overflow: hidden;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

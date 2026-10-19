@@ -1,0 +1,37 @@
+:root {
+  --paper-background: #f5f3ea;
+  --paper: #fffdf7;
+  --paper-soft: #faf8f0;
+  --ink: #373c37;
+  --ink-muted: #757b70;
+  --ink-faint: #9a9f92;
+  --line: #8b8e7f;
+  --line-soft: #d7d8ca;
+  --accent: #8874ba;
+  --accent-deep: #66518f;
+  --lavender: #eae3f5;
+  --blue: #e1edf3;
+  --yellow: #fff0b9;
+  --green: #e5edda;
+  --pink: #f8e2e2;
+  --success: #6d8c67;
+  --danger: #a34e52;
+  --font-body:
+    "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", system-ui, sans-serif;
+  --font-hand: "KaiTi", "STKaiti", "Kaiti SC", "Microsoft YaHei", serif;
+  --font-note: "Segoe Print", "Comic Sans MS", "KaiTi", "STKaiti", cursive;
+  --radius-paper: 13px 17px 12px 15px / 15px 12px 17px 13px;
+  --radius-note: 4px 7px 5px 3px;
+  --radius-input: 9px 12px 8px 11px;
+  --shadow-paper: 2px 3px 0 #d7d5c566, 0 4px 14px #4d514508;
+  --shadow-note: 2px 3px 0 #b9b6a138;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --nav-width: 208px;
+  --header-height: 94px;
+}
